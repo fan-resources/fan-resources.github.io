@@ -1,0 +1,36 @@
+/* navigation bar layout */
+
+nav {
+  padding: 0.4rem 0 0.4rem 6.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'title mains supports';
+}
+
+.nav-logo {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  z-index: 20;
+}
+
+.nav-logo-img {
+  height: 6rem;
+}
+
+/* navigation bar styling */
+
+nav {
+  background-color: var(--color-almost-black);
+  /* background: var(--gradient-bar); */
+  mask-image: linear-gradient(black, black calc(100% - 0.3rem), transparent);
+}
+
+.nav-site-title {
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+  font-weight: 600;
+  color: var(--color-bg-default);
+  display: block;
+}

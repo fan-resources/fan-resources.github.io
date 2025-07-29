@@ -3,35 +3,35 @@ package org.skyluc.fan_resources_net
 import org.skyluc.fan_resources.Common
 import org.skyluc.fan_resources.data.Date
 import org.skyluc.fan_resources.data.Path
-import org.skyluc.fan_resources.html.DelayedElementCompiledDataSeq
-import org.skyluc.fan_resources.html.DelayedMultimediaCompiledData
-import org.skyluc.fan_resources.html.ElementCompiledData
-import org.skyluc.fan_resources.html.LocalImageCopyCompiledData
-import org.skyluc.fan_resources.html.PageDescription
-import org.skyluc.fan_resources.html.SitePage
-import org.skyluc.fan_resources.html.Url
-import org.skyluc.fan_resources.html.component.Head
-import org.skyluc.fan_resources.html.component.MediumCard
-import org.skyluc.fan_resources.html.component.SectionHeader
+import org.skyluc.fan_resources.html as fr
 import org.skyluc.html.*
 
+import fr.component.MediumCard
+import fr.component.SectionHeader
+import fr.component.Head as HeadComponents
 import Html.*
+import fr.Url
+import fr.ElementCompiledData
+import fr.LocalImageCopyCompiledData
+import fr.DelayedElementCompiledDataSeq
+import fr.DelayedMultimediaCompiledData
+import fr.component.OpenGraphSection
 
-object MainPage extends SitePage {
+object MainPage extends fr.SitePage {
 
-  override def description: PageDescription = new PageDescription {
+  override def description = new fr.PageDescription {
 
     override val title: String = "Fan Resources Network"
 
     override val description: String = "A network of websites containing resources for fan of different music groups"
 
-    override val image: Url = Url("/")
+    override val image: Url = Site.absoluteUrl(Url("/fr512.png"))
 
-    override val canonicalUrl: Url = Url("/")
+    override val canonicalUrl: Url = Site.absoluteUrl(Url("/"))
 
     override val ogType: String = "website"
 
-    override val logo: Url = Url("missing") // TODO
+    override val logo: Url = Site.absoluteUrl(Url("/fr512.png"))
 
     override val locale: String = Common.VALUE_LOCALE
 
@@ -42,18 +42,60 @@ object MainPage extends SitePage {
   override def javascriptFiles(): Seq[Url] = Seq()
 
   override def headContent(): Seq[HeadElement[?]] =
-    Head.css(
-      Url(Path("asset", "css", "style.css")),
-      Url(Path("asset", "css", "fr-style.css")),
+    Seq(
+      HeadComponents.charsetUtf8,
+      HeadComponents.googleFonts(fr.SitePage.HREF_GOOGLE_FONT_NOTO),
+      HeadComponents.css(
+        Url(Path("asset", "css", "style.css")),
+        Url(Path("asset", "css", "fr-style.css")),
+      ),
+      HeadComponents.icons(description.logo),
+      OpenGraphSection.generate(description),
+      HeadComponents.statistics(Config.current.isLocal, Site.DOMAIN_NAME_FR),
+    ).flatten
+
+  // div tag
+  val NAV_DIV = "nav"
+
+  // class
+  val CLASS_NAV_LOGO = "nav-logo"
+  val CLASS_NAV_LOGO_IMG = "nav-logo-img"
+  val CLASS_NAV_SITE_TITLE = "nav-site-title"
+
+  // text
+  val NAV_LOGO_ALT = "Fan Resources Network logo"
+  val NAV_TITLE_TEXT = "Fan<br>Resources<br>Network"
+
+  // URLs
+  val NAV_LOGO_PATH = "/fr512.png"
+  val ROOT_PATH = "/"
+
+  override def headerContent(): Seq[BodyElement[?]] =
+    Seq(
+      a()
+        .withHref(ROOT_PATH)
+        .withClass(CLASS_NAV_LOGO)
+        .appendElements(
+          img()
+            .withClass(CLASS_NAV_LOGO_IMG)
+            .withSrc(NAV_LOGO_PATH)
+            .withAlt(NAV_LOGO_ALT)
+        ),
+      div(NAV_DIV).appendElements(
+        a()
+          .withClass(CLASS_NAV_SITE_TITLE)
+          .withHref(ROOT_PATH)
+          .appendElements(
+            text(NAV_TITLE_TEXT)
+          )
+      ),
     )
 
-  override def headerContent(): Seq[BodyElement[?]] = Seq()
-
   override def mainContent(): Seq[BodyElement[?]] = Seq(
-    SectionHeader.generate("What is the Fan Resources network ?"),
+    SectionHeader.generate("What is the Fan Resources Network ?"),
     p().appendElements(
       text(
-        "The Fan Resources Network is a small, starting network of websites with the goal of providing comprehensive information and resources about one music group on each website."
+        "The Fan Resources Network is a small, starting network of websites with the goal of providing comprehensive information and resources on one music group."
       )
     ),
     p().appendElements(text("The current websites are:")),
@@ -63,7 +105,7 @@ object MainPage extends SitePage {
         babymetalData,
       )
     ),
-    SectionHeader.generate("More music groups will be added ?"),
+    SectionHeader.generate("Will more music groups be added ?"),
     p().appendElements(
       text("Yes. I have a couple of other groups I want to create websites for, soon.")
     ),

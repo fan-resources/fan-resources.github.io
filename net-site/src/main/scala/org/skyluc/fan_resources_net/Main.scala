@@ -20,15 +20,16 @@ object Main {
         "fr-style.css",
       ),
       CssPage(
-        BASE_SITE_CSS_PATH,
+        BASE_CSS_PATH,
         Seq(
-          Path("colors.css")
+          Path("colors.css"),
+          Path("navbar.css"),
         ),
         "style.css",
       ),
     )
 
-    SiteOutput.generate(pages, Seq(BASE_SITE_STATIC_PATH.asFilePath()), SITE_OUTPUT_PATH.asFilePath())
+    SiteOutput.generate(pages, Seq(BASE_STATIC_PATH.asFilePath()), SITE_OUTPUT_PATH.asFilePath())
   }
 
   val CSS_SEGMENT = "css"
@@ -39,8 +40,8 @@ object Main {
   val STATIC_PIECES_SEGMENT = "static_pieces"
   val TARGET_SEGMENT = "target"
 
-  val BASE_SITE_STATIC_PATH = Path(NET_SITE_SEGMENT, STATIC_SEGMENT)
-  val BASE_SITE_CSS_PATH = Path(NET_SITE_SEGMENT, STATIC_PIECES_SEGMENT, CSS_SEGMENT)
+  val BASE_STATIC_PATH = Path(STATIC_SEGMENT)
+  val BASE_CSS_PATH = Path(STATIC_PIECES_SEGMENT, CSS_SEGMENT)
   val BASE_FR_CSS_PATH = Path(FR_SEGMENT, STATIC_PIECES_SEGMENT, CSS_SEGMENT)
 
   val SITE_OUTPUT_PATH = Path(TARGET_SEGMENT, SITE_SEGMENT)

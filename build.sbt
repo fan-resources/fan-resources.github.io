@@ -24,8 +24,8 @@ lazy val root = (project in file("."))
     Compile / watchSources ++= Seq(
       baseDirectory.value / "fan-resources" / "static",
       baseDirectory.value / "fan-resources" / "static_pieces",
-      baseDirectory.value / "net-site" / "static",
-      baseDirectory.value / "net-site" / "static_pieces",
+      baseDirectory.value / "static",
+      baseDirectory.value / "static_pieces",
     ),
   )
   .dependsOn(`net-site`)
