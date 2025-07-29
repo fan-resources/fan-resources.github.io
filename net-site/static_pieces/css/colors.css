@@ -1,0 +1,17 @@
+:root {
+
+  --color-almost-black: #101010;
+  --color-closeto-black: #202020;
+
+
+  --color-text: var(--color-almost-black);
+  --color-designation: darkgray;
+  --color-text-soft: var(--color-closeto-black);
+  --color-bg-default: lightgray;
+
+  --color-bg-cover: gray;
+
+  --color-highlight: gray;
+
+  /* --gradient-page: */
+}
