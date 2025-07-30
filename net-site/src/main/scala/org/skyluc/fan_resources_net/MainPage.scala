@@ -51,6 +51,9 @@ object MainPage extends fr.SitePage {
       ),
       HeadComponents.icons(description.logo),
       OpenGraphSection.generate(description),
+      // if (description.isRoot) { // TODO
+      HeadComponents.searchEngineVerification(Site.GOOGLE_VERIFICATION_CODE, Site.MICROSOFT_VERIFICATION_CODE),
+      // } else { Nil },
       HeadComponents.statistics(Config.current.isLocal, Site.DOMAIN_NAME_FR),
     ).flatten
 
