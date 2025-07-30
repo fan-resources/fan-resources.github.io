@@ -3,10 +3,11 @@ package org.skyluc.fan_resources_net
 import org.skyluc.fan_resources.data.Path
 import org.skyluc.fan_resources.html.SiteOutput
 import org.skyluc.fan_resources.html.pages.CssPage
+import org.skyluc.fan_resources.html.pages.SitemapPage
 
 object Main {
   def main(argv: Array[String]): Unit = {
-    val pages = Seq(
+    val cssPages = Seq(
       MainPage,
       CssPage(
         BASE_FR_CSS_PATH,
@@ -28,6 +29,10 @@ object Main {
         "style.css",
       ),
     )
+
+    val allPages = Seq(MainPage)
+
+    val pages = allPages ++ cssPages :+ SitemapPage(allPages)
 
     SiteOutput.generate(pages, Seq(BASE_STATIC_PATH.asFilePath()), SITE_OUTPUT_PATH.asFilePath())
   }

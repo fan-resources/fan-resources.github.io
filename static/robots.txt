@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dark/
+
+Sitemap: https://fan-resources.net/sitemap.xml
