@@ -111,7 +111,7 @@ object MainPage extends fr.SitePage {
     ),
     p().appendElements(
       text(
-        "And in the future, the plan is to open the platform to allow others to provide information about the music they support."
+        "And in the future, the plan is to open the platform to allow others to provide information about the music groups they support."
       )
     ),
   )
